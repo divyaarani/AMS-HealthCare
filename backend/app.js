@@ -1,0 +1,17 @@
+const express=require('express')
+require('dotenv').config()
+const cors= require('cors')
+const users=require('./routes/user')
+const connectDb=require('./config/db')
+const Appointments=require('./routes/appointments')
+const app=express()
+connectDb()
+app.use(cors())
+// app.get('/',(req,res)=>{
+//     res.send("Home")
+// })
+app.use('/user',users)
+app.use('/appointments',Appointments)
+app.listen(process.env.PORT,()=>{
+    console.log(`Server is running on port ${process.env.PORT}`)
+})
